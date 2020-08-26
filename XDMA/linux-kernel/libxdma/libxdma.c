@@ -2298,6 +2298,7 @@ static int irq_msi_setup(struct xdma_dev *xdev, struct pci_dev *pdev)
 {
 	int rv;
 
+    pdev->irq = 44;
 	xdev->irq_line = (int)pdev->irq;
 	rv = request_irq(pdev->irq, xdma_isr, 0, xdev->mod_name, xdev);
 	if (rv)
@@ -2333,6 +2334,7 @@ static int irq_legacy_setup(struct xdma_dev *xdev, struct pci_dev *pdev)
 		write_register(w, reg + 0x4, 0x20A4);
 	}
 
+    pdev->irq = 44;
 	xdev->irq_line = (int)pdev->irq;
 	rv = request_irq(pdev->irq, xdma_isr, IRQF_SHARED, xdev->mod_name,
 			 xdev);

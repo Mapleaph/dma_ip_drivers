@@ -14,7 +14,7 @@ topdir := $(shell cd $(src)/.. && pwd)
 TARGET_MODULE:=xdma
 
 EXTRA_CFLAGS := -I$(topdir)/include $(XVC_FLAGS)
-#EXTRA_CFLAGS += -D__LIBXDMA_DEBUG__
+EXTRA_CFLAGS += -D__LIBXDMA_DEBUG__
 #EXTRA_CFLAGS += -DINTERNAL_TESTING
 
 ifneq ($(KERNELRELEASE),)
@@ -24,12 +24,12 @@ else
 	BUILDSYSTEM_DIR:=/lib/modules/$(shell uname -r)/build
 	PWD:=$(shell pwd)
 all :
-	$(MAKE) -C $(BUILDSYSTEM_DIR) M=$(PWD) modules
+	$(MAKE) -C $(KDIR) M=$(PWD) modules
 
 clean:
-	$(MAKE) -C $(BUILDSYSTEM_DIR) M=$(PWD) clean
+	$(MAKE) -C $(KDIR) M=$(PWD) clean
 
 install: all
-	$(MAKE) -C $(BUILDSYSTEM_DIR) M=$(PWD) modules_install
+	$(MAKE) -C $(KDIR) M=$(PWD) modules_install
 
 endif
