@@ -2298,7 +2298,7 @@ static int irq_msi_setup(struct xdma_dev *xdev, struct pci_dev *pdev)
 {
 	int rv;
 
-    pdev->irq = 44;
+    //pdev->irq = 44;
 	xdev->irq_line = (int)pdev->irq;
 	rv = request_irq(pdev->irq, xdma_isr, 0, xdev->mod_name, xdev);
 	if (rv)
